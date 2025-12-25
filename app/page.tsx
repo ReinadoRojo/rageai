@@ -1,11 +1,15 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { MessageForm } from "./_components/message-form";
+import { RotateCcw } from "lucide-react";
+
+const hashEnv = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || '000000'
+const cropHashEnv = hashEnv.slice(0,6)
 
 export default function Home() {
   return (
-    <div className="container mx-auto *:border-t *:border-b *:border-dashed *:border-primary-foreground space-y-8 border-l border-r border-dashed">
-      <header className="h-12 flex items-center px-4">
+    <div className="container mx-auto *:border-t *:border-b *:border-dashed *:border-primary-foreground space-y-8 border-l border-r border-dashed *:px-18">
+      <header className="h-12 flex items-center">
         <nav className="flex flex-row w-full">
           <Link href={"/"} className="text-xl">
             RageAI
@@ -28,19 +32,21 @@ export default function Home() {
           </ul>
         </nav>
       </header>
-      <main className="py-8 px-4 flex flex-col space-y-4 w-full h-[calc(100vh-10.5rem)]">
-        <header>
-          <h1>Ragebait Chat</h1>
-        </header>
+      <main className="py-8 flex flex-col space-y-4 w-full h-[calc(100vh-10.5rem)]">
         <section>
         </section>
-        <footer className="mt-auto">
+        <footer className="mt-auto flex flex-col space-y-2">
+          <div className="flex">
+            <Button variant={"ghost"} size={"icon-sm"} className="ml-auto" title="Restart chat">
+              <RotateCcw />
+            </Button>
+          </div>
           <MessageForm />
         </footer>
       </main>
-      <footer className="px-4 py-6 h-12 flex justify-center items-center">
+      <footer className="py-6 h-12 flex justify-center items-center">
         <p className="text-xs text-accent-foreground text-center">
-          RageAI. Made with ❤️ by Ezequiel C. ~ Running on Vercel, commit <span>000000</span>
+          RageAI. Made with ❤️ by Ezequiel C. ~ Running on Vercel, commit <span>{cropHashEnv}</span>
         </p>
       </footer>
     </div>
