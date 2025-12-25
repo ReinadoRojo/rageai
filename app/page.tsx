@@ -1,7 +1,8 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { MessageForm } from "./_components/message-form";
-import { RotateCcw } from "lucide-react";
+import { Chat } from "./_components/chat";
 
 const hashEnv = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || '000000'
 const cropHashEnv = hashEnv.slice(0,6)
@@ -32,18 +33,7 @@ export default function Home() {
           </ul>
         </nav>
       </header>
-      <main className="py-8 flex flex-col space-y-4 w-full h-[calc(100vh-10.5rem)]">
-        <section>
-        </section>
-        <footer className="mt-auto flex flex-col space-y-2">
-          <div className="flex">
-            <Button variant={"ghost"} size={"icon-sm"} className="ml-auto" title="Restart chat">
-              <RotateCcw />
-            </Button>
-          </div>
-          <MessageForm />
-        </footer>
-      </main>
+      <Chat />
       <footer className="py-6 h-12 flex justify-center items-center">
         <p className="text-xs text-accent-foreground text-center">
           RageAI. Made with ❤️ by Ezequiel C. ~ Running on Vercel, commit <span>{cropHashEnv}</span>
@@ -52,3 +42,5 @@ export default function Home() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';

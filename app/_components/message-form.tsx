@@ -2,17 +2,27 @@
 
 import { messageSubmit } from "@/actions/ai";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupTextarea } from "@/components/ui/input-group";
-import { useState } from "react";
+import { MMessage } from "@/types";
+import { useState, useTransition } from "react";
 
-export function MessageForm() {
+export function MessageForm({ history, setHistory }: {history: MMessage[], setHistory: (value: MMessage[]) => void}) {
   const [canSend, setCanSend] = useState(false)
+  const [pending, startTransition] = useTransition()
   const [message, setMessage] = useState("")
 
   return (
     <form onSubmit={(e) => {
       e.preventDefault();
-      messageSubmit(message)
-      setMessage("")
+      startTransition(() => {
+        const rawHistory = JSON.stringify(history)
+        messageSubmit(message, rawHistory).then(response => {
+          if(!response.success) return; // Avoid updating failing responses
+          setHistory(response.history)  // Update history
+          setMessage("")                // Reset form input
+        }).catch(e => {
+          console.log(e)
+        })
+      })
     }}>
       <InputGroup>
         <InputGroupTextarea 
@@ -34,10 +44,10 @@ export function MessageForm() {
         />
         <InputGroupAddon align="block-end">
           <InputGroupButton
-            variant={!canSend ? 'dashed' : 'default'}
+            variant={(!canSend || pending) ? 'dashed' : 'default'}
             className="rounded-full ml-auto cursor-pointer"
             size="sm"
-            disabled={!canSend}
+            disabled={!canSend || pending}
             type="submit"
           >
             <span>Send</span>
