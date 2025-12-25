@@ -25,16 +25,17 @@ export function Chat() {
   const setHistory = (hist: MMessage[]) => {
     if(!window) return
     internalSetHistory(hist)
-    console.log(hist)
     window.sessionStorage.setItem('messages', JSON.stringify(hist))
   }
 
   return (
-    <main className="py-8 flex flex-col space-y-4 w-full h-[calc(100vh-10.5rem)]">
+    <main className="py-8 flex flex-col space-y-4 w-full min-h-[calc(100vh-10.5rem)]">
       <MessagesBoard messages={history} />
       <footer className="mt-auto flex flex-col space-y-2">
         <div className="flex">
-          <Button variant={"ghost"} size={"icon-sm"} className="ml-auto" title="Restart chat">
+          <Button variant={"ghost"} size={"icon-sm"} className="ml-auto" title="Restart chat" onClick={() => {
+            setHistory([])
+          }}>
             <RotateCcw />
           </Button>
         </div>

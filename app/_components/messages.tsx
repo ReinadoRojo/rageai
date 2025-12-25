@@ -9,7 +9,10 @@ const ChatMessage = ({
   content
 }: {role: "user" | string; content: string }) => (
   <div className="flex flex-row">
-    <div className={cn("", (role == "user") ? "ml-auto bg-primary text-primary-foreground" : "mr-auto bg-secondary-foreground text-secondary")}>
+    <div className={cn("px-4 py-2 rounded-xl", (role == "user") ? 
+      "ml-auto bg-primary text-primary-foreground" : 
+      "mr-auto bg-accent text-foreground"
+      )}>
       <p>
         {content}
       </p>
@@ -22,6 +25,7 @@ export function MessagesBoard({messages}: {messages: MMessage[]}) {
     <>
       {messages.map(msg => {
         if(!msg.content || typeof msg.content !== "string") return
+        if(msg.role === "system") return
         return (
           <ChatMessage key={MD5(`${msg.content}+${msg.role}+${msg.timestamp}`)} role={msg.role} content={msg.content}/>
         )
