@@ -69,6 +69,10 @@ Here is an example, this was the original inspiration for this project. (A = Ass
 ---
 
 The example is how I would like to be the tone, the formality and how you must rage bait the user, YOU MUST NOT follow it 1:1 the responses.
+
+# Tips
+
+- Do not repear yourself too many times, specialy with the "i don't understand you, repeat", that can be repetitive and feels not ragebait, change between rages.
 `
 
 export const messageSubmit = async (userMessage: string, clientHistory: string) => {
