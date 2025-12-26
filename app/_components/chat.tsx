@@ -29,7 +29,7 @@ export function Chat() {
   }
 
   return (
-    <main className="py-8 flex flex-col space-y-4 w-full min-h-[calc(100vh-10.5rem)]">
+    <main className="py-8 flex flex-col space-y-4 w-full h-[calc(100vh-10.5rem)]">
       <MessagesBoard messages={history} />
       <footer className="mt-auto flex flex-col space-y-2">
         <div className="flex">
