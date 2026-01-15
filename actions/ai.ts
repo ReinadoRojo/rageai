@@ -2,7 +2,7 @@
 
 import { MMessage } from "@/types";
 import { OpenRouter } from "@openrouter/sdk";
-import { umami } from "@/lib/umami";
+import { serverTrack } from "@/lib/umami";
 
 const client = new OpenRouter({
   apiKey: process.env.AI_SK,
@@ -99,7 +99,7 @@ export const messageSubmit = async (userMessage: string, clientHistory: string) 
     history.push(selected)
 
     // 5.-1. Track usage
-    umami.track({ hostname: "rageai-seven.vercel.app", url: "/", name: "ai-message", data: {
+    serverTrack({
         model: ai_model,
         prompt_length: userMessage.length,
         response_length: selected.content?.length,
@@ -108,7 +108,7 @@ export const messageSubmit = async (userMessage: string, clientHistory: string) 
             completion: response.usage?.completionTokens,
             total: response.usage?.totalTokens,
         }
-    }}).catch((e) => {
+    }).catch((e) => {
         // TODO: Maybe sentry or something about logging
         console.error("Umami tracking error:", e)
     });
