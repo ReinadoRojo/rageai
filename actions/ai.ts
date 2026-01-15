@@ -2,7 +2,7 @@
 
 import { MMessage } from "@/types";
 import { OpenRouter } from "@openrouter/sdk";
-import umami from "@umami/node";
+import { umami } from "@/lib/umami";
 
 const client = new OpenRouter({
   apiKey: process.env.AI_SK,
