@@ -22,6 +22,7 @@ async function serverTrack(data?: object) {
           "hostname":"rageai-seven.vercel.app",
           "url":"https://rageai-seven.vercel.app/",
           "referrer":"",
+          "id": "server:reserved",
           data
         }
       })
