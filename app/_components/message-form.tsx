@@ -64,6 +64,7 @@ export function MessageForm({ history, setHistory }: {history: MMessage[], setHi
             size="sm"
             disabled={!canSend || pending}
             type="submit"
+            data-umami-event="message-submit"
           >
             <span>Send</span>
           </InputGroupButton>

@@ -33,7 +33,7 @@ export function Chat() {
       <MessagesBoard messages={history} />
       <footer className="mt-auto flex flex-col space-y-2">
         <div className="flex">
-          <Button variant={"ghost"} size={"icon-sm"} className="ml-auto" title="Restart chat" onClick={() => {
+          <Button variant={"ghost"} size={"icon-sm"} className="ml-auto" title="Restart chat" data-umami-event="clearhistory-click" onClick={() => {
             setHistory([])
           }}>
             <RotateCcw />

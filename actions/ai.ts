@@ -2,6 +2,7 @@
 
 import { MMessage } from "@/types";
 import { OpenRouter } from "@openrouter/sdk";
+import umami from "@umami/node";
 
 const client = new OpenRouter({
   apiKey: process.env.AI_SK,
@@ -96,6 +97,21 @@ export const messageSubmit = async (userMessage: string, clientHistory: string) 
 
     const selected = { timestamp: new Date().toISOString(), ...response.choices[0].message}
     history.push(selected)
+
+    // 5.-1. Track usage
+    umami.track({ url: "/ai", name: "ai-message", data: {
+        model: ai_model,
+        prompt_length: userMessage.length,
+        response_length: selected.content?.length,
+        tokens: {
+            prompt: response.usage?.promptTokens,
+            completion: response.usage?.completionTokens,
+            total: response.usage?.totalTokens,
+        }
+    }}).catch((e) => {
+        // TODO: Maybe sentry or something about logging
+        console.error("Umami tracking error:", e)
+    });
 
     // 5. Return response to UI
     return {

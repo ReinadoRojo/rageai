@@ -25,6 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        {/* Umami analytics. I use it for control who abuse the system, I don't care about anything else... */}
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="7839702f-8d3e-483b-8c15-ecc3da1d16e1"></script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased max-h-screen h-screen`}
       >
