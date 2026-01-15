@@ -99,7 +99,7 @@ export const messageSubmit = async (userMessage: string, clientHistory: string) 
     history.push(selected)
 
     // 5.-1. Track usage
-    umami.track({ url: "/ai", name: "ai-message", data: {
+    umami.track({ hostname: "rageai-seven.vercel.app", url: "/", name: "ai-message", data: {
         model: ai_model,
         prompt_length: userMessage.length,
         response_length: selected.content?.length,
