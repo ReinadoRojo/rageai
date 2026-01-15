@@ -99,7 +99,7 @@ export const messageSubmit = async (userMessage: string, clientHistory: string) 
     history.push(selected)
 
     // 5.-1. Track usage
-    umami.track({ url: "/action.ai", name: "ai-message", , data: {
+    umami.track({ url: "/action.ai", name: "ai-message", data: {
         model: ai_model,
         prompt_length: userMessage.length,
         response_length: selected.content?.length,
